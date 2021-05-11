@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     async getEvents() {
-      let { data } = await axios.get("http://localhost:3333/event");
+      let { data } = await axios.get("http://localhost:5000/api/v1/event");
       this.events = data;
       console.log(this.events);
     },
