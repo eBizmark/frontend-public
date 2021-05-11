@@ -28,8 +28,13 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
-    "@nuxtjs/tailwindcss"
+    "@nuxtjs/tailwindcss",
+    '@nuxtjs/composition-api/module'
   ],
+  generate: {
+    // choose to suit your project
+    interval: 2000,
+  },
   tailwindcss:{
     jit: true
   },

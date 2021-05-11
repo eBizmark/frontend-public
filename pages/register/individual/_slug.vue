@@ -18,10 +18,10 @@
             >
               <h2 class="leading-relaxed">{{ event.nama }}</h2>
               <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                {{ event.kategori }}
+                {{ kategori }}
               </p>
               <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                {{ event.tanggal }}
+                {{ event.hari+', '+event.tanggal }}
               </p>
             </div>
           </div>
@@ -148,11 +148,29 @@
 </template>
 
 <script>
+import { defineComponent, useMeta, computed, ref, onMounted, reactive } from '@nuxtjs/composition-api'
 import axios from "axios";
-export default {
+export default defineComponent({
+  head: {},
+  setup(){
+    useMeta({title: 'Form Pemesan'})
+    const event = reactive({
+      id:null,
+      nama:'',
+      slug:'',
+      hari: '',
+      tanggal :'',
+      maksPeserta:'',
+      created_at:'',
+      updated_at:'',
+      pemateri:'',
+      kategori:'',
+    })
+  },
   data() {
     return {
       event: {},
+      kategori: '',
       showKategoriModal: false
     };
   },
@@ -162,14 +180,15 @@ export default {
   methods: {
     async getEvent() {
       let { data } = await axios.get(
-        `http://localhost:3333/event/` + this.$route.params.slug
+        `http://localhost:5000/api/v1/event/` + this.$route.params.slug
       );
       this.event = data;
+      this.kategori = data.kategori.nama
       console.log(this.event);
     },
     toggleKategoriModal() {
       this.showKategoriModal = !this.showKategoriModal;
     }
   }
-};
+});
 </script>
