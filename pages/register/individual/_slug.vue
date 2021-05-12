@@ -88,11 +88,11 @@
                 />
               </div>
               <div class="flex flex-col">
-                <label class="leading-loose">Referal Code</label>
+                <label class="leading-loose">Referal Code (Optional)</label>
                 <input
                   type="text"
                   class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                  placeholder="Optional"
+                  placeholder="Kode Referal"
                 />
               </div>
             </div>
@@ -132,15 +132,20 @@
     <card-modal :showing="showKategoriModal" @close="showKategoriModal = false">
       <h2 class="text-xl font-bold text-gray-900">Kategori Tiket</h2>
       <div class="my-4 w-full">
-        <button class="btn-red w-full my-2">
-          Mahasiswa
-        </button>
-        <button class="btn-indigo w-full my-2">
+        <nuxt-link :to="`/register/individual/FormPeserta`">
+          <button class="btn-indigo hover:bg-indigo-400 w-full my-2">
+            Mahasiswa
+          </button>
+        </nuxt-link>
+<!--        <button class="btn-indigo hover:bg-indigo-400 w-full my-2">-->
+<!--          Mahasiswa-->
+<!--        </button>-->
+        <button class="btn-indigo hover:bg-indigo-400 w-full my-2">
           Umum
         </button>
       </div>
 
-      <button class="btn-red" @click="showKategoriModal = false">
+      <button class="btn-red hover:bg-red-400" @click="showKategoriModal = false">
         Close
       </button>
     </card-modal>

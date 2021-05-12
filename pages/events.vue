@@ -56,16 +56,16 @@
       <h2 class="text-xl font-bold text-gray-900">Kategori Tiket</h2>
       <div class="my-4 w-full">
         <nuxt-link :to="`/register/individual/${modalData.slug}`">
-          <button class="btn-indigo w-full my-2">
+          <button class="btn-indigo hover:bg-indigo-400 w-full my-2">
             Individual
           </button>
         </nuxt-link>
-        <button class="btn-green w-full my-2" @click="toggleCounterModal">
+        <button class="btn-indigo hover:bg-indigo-400 w-full my-2" @click="toggleCounterModal">
           Group
         </button>
       </div>
 
-      <button class="btn-red" @click="showKategoriModal = false">
+      <button class="btn-red hover:bg-red-400" @click="showKategoriModal = false">
         Close
       </button>
     </card-modal>
