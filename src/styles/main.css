@@ -1,0 +1,83 @@
+html,
+body,
+#app {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html.dark {
+  background: #222;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  @apply bg-teal-600 opacity-75;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+.btn {
+  @apply px-4 py-1 rounded inline-block
+    bg-teal-600 text-white cursor-pointer
+    hover:bg-teal-700
+    disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50;
+}
+
+.icon-btn {
+  @apply inline-block cursor-pointer select-none
+    opacity-75 transition duration-200 ease-in-out
+    hover:opacity-100 hover:text-teal-600;
+  font-size: 0.9em;
+}
+.btn-indigo {
+  @apply px-6 py-3 rounded bg-indigo-600 text-white text-sm leading-4 font-bold whitespace-nowrap transition delay-75 duration-300 ease-in-out hover:bg-orange-400 focus:bg-orange-400;
+}
+.btn-red {
+  @apply px-6 py-3 rounded bg-red-600 text-white text-sm font-bold whitespace-nowrap transition delay-75 duration-300 ease-in-out hover:bg-red-800 focus:bg-red-800;
+}
+.btn-pink {
+  @apply px-6 py-3 rounded bg-pink-400 text-white text-sm leading-4 font-bold whitespace-nowrap transition delay-75 duration-300 ease-in-out hover:bg-orange-400 focus:bg-orange-400;
+}
+.btn-menu {
+  @apply flex items-center space-x-3 text-pink-400 p-2 rounded-md font-medium transition delay-75 duration-300 ease-in-out hover:bg-pink-500 hover:text-white;
+}
+.btn-green {
+  @apply px-6 py-3 rounded bg-green-600 text-white text-sm font-bold whitespace-nowrap transition delay-75 duration-300 ease-in-out hover:bg-green-800 focus:bg-green-800;
+}
+.btn-spinner,
+.btn-spinner:after {
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.btn-spinner {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 0.2em solid white;
+  border-right: 0.2em solid white;
+  border-bottom: 0.2em solid white;
+  border-left: 0.2em solid transparent;
+  transform: translateZ(0);
+  animation: spinning 1s infinite linear;
+}
+
+@keyframes spinning {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
