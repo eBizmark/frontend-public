@@ -10,6 +10,11 @@ export default [
         name: 'events',
     },
     {
+        path: '/ticket/:kode',
+        component: () => import('../pages/Ticket.vue'),
+        name: 'ticket',
+    },
+    {
         path: '/a/:id',
         component: () => import('../pages/PageA.vue'),
         name: 'a',
