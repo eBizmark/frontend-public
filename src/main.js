@@ -4,10 +4,13 @@ import App from './App.vue'
 import routes from './routes'
 import viteSSR, { ClientOnly } from 'vite-ssr'
 import { createHead } from '@vueuse/head'
-
+import { createWebHistory } from "vue-router";
 export default viteSSR(
     App,
-    { routes },
+    {
+        history: createWebHistory(),
+        routes: routes
+    },
     async (ctx) => {
         // install all modules under `modules/`
         Object.values(import.meta.globEager('./modules/*.js')).map((i) =>

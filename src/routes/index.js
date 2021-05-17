@@ -10,7 +10,7 @@ export default [
         name: 'events',
     },
     {
-        path: '/a',
+        path: '/a/:id',
         component: () => import('../pages/PageA.vue'),
         name: 'a',
     },

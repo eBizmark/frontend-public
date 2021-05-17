@@ -3,7 +3,16 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import {onMounted} from "vue";
 export default {
+  setup(){
+    const route = useRoute()
+    //Membaca params
+    onMounted(() => {
+      console.log(route.params.id)
+    })
+  },
   name: 'PageA',
   props: {
     msg: String,

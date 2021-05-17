@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-screen">
     <header class="bg-black invisible md:visible block fixed w-full z-40">
-      <nav class="flex justify-between w-full bg-white text-black p-4">
+      <nav class="flex justify-between w-full dark:bg-white dark:text-black bg-black text-white p-4">
         <router-link to="/"><span class="font-semibold text-xl tracking-tight">E-Bizmark</span></router-link>
 <!--        <div class="md:items-center md:w-auto flex">-->
 <!--          <div class="md:flex hidden">-->
