@@ -8,8 +8,7 @@ import { createWebHistory } from "vue-router";
 export default viteSSR(
     App,
     {
-        history: createWebHistory(),
-        routes: routes
+        routes
     },
     async (ctx) => {
         // install all modules under `modules/`
