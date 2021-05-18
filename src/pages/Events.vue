@@ -35,23 +35,23 @@
         </div>
       </button>
     </div>
-  </div>
-  <!--Kategori Modal-->
-  <card-modal :showing="showKategoriModal" @close="showKategoriModal = false">
-    <h2 class="text-xl font-bold text-gray-900">Kategori Tiket</h2>
-    <div class="my-4 w-full">
-      <button class="btn-indigo hover:bg-indigo-400 w-full my-2" @click="keFormIndividu">
-        Individual
-      </button>
-      <button class="btn-indigo hover:bg-indigo-400 w-full my-2" @click="toggleCounterModal">
-        Group
-      </button>
-    </div>
+    <!--Kategori Modal-->
+    <card-modal :showing="showKategoriModal" @close="showKategoriModal = false">
+      <h2 class="text-xl font-bold text-gray-900">Kategori Pendaftar</h2>
+      <div class="my-4 w-full">
+        <button class="btn-indigo hover:bg-indigo-400 w-1/3 mx-2" @click="keFormIndividu">
+          Individual
+        </button>
+        <button class="btn-indigo hover:bg-indigo-400 w-1/3 mx-2" @click="toggleCounterModal">
+          Group
+        </button>
+      </div>
 
-    <button class="btn-red hover:bg-red-400" @click="showKategoriModal = false">
-      Close
-    </button>
-  </card-modal>
+      <button class="btn-red hover:bg-red-400" @click="showKategoriModal = false">
+        Close
+      </button>
+    </card-modal>
+  </div>
 </template>
 <script>
 import {useHead} from '@vueuse/head'
@@ -100,7 +100,7 @@ export default defineComponent({
     const peserta = ref(1)
 
     const getDataAcara = async () => {
-      let { data } = await axios.get('http://localhost:5000/api/v1/event')
+      let { data } = await axios.get('https://api-ebizmark.irvankdhf.xyz/api/v1/event')
       console.log("ini data acara "+data)
       dataAcara.value = data
     }
@@ -142,8 +142,9 @@ export default defineComponent({
     }
 
     function keFormIndividu() {
+      // console.log("ini slug" + modalData.slug)
       router.push({
-        path: `/register/individual/${modalData.slug}`,
+        name: 'pemesan-individu',
         params: {
           slug: modalData.slug
         }

@@ -25,6 +25,26 @@ export default [
         name: 'b',
     },
     {
+        path: '/daftar/mahasiswa/:slug',
+        component: () => import('../components/FormMahasiswa.vue'),
+        name: 'form-mahasiswa',
+    },
+    {
+        path: '/daftar/umum/:slug',
+        component: () => import('../components/FormMahasiswa.vue'),
+        name: 'form-umum',
+    },
+    {
+        path: '/daftar/mahasiswa/:slug',
+        component: () => import('../components/FormMahasiswa.vue'),
+        name: 'form-mahasiswa',
+    },
+    {
+        path: '/pemesan/individu/:slug',
+        component: () => import('../pages/individu/index.vue'),
+        name: 'pemesan-individu',
+    },
+    {
         path: '/:catchAll(.*)',
         name: 'not-found',
         component: () => import('../pages/404.vue'),
