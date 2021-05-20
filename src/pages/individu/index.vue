@@ -123,9 +123,9 @@
           Kembali
         </router-link>
         <button
-            class="px-6 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500"
+            class="px-3 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500"
         >
-          Next
+          Selanjutnya
         </button>
       </div>
     </form>
@@ -134,9 +134,7 @@
       <h2 class="text-xl font-bold text-gray-900">Kategori Tiket</h2>
       <div class="my-4 w-full">
         <button class="btn-indigo hover:bg-indigo-400 w-1/3 mx-2" @click="keFormMahasiswa">
-          <button class="btn-indigo hover:bg-indigo-400 w-full my-2">
             Mahasiswa
-          </button>
         </button>
         <!--        <button class="btn-indigo hover:bg-indigo-400 w-full my-2">-->
         <!--          Mahasiswa-->
