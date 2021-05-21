@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto px-20">
-    <h2 class="pb-3 md:text-2xl text-lg font-bold">Daftar Acara Ebizmark</h2>
+    <h2 class="pb-3 md:text-2xl text-lg font-bold dark:text-white">Daftar Acara</h2>
     <div class="border-t-2 py-4"></div>
   </div>
   <!-- component -->
@@ -21,8 +21,8 @@
               </svg>
             </div>
             <div class="mt-8">
-              <p class="text-xl font-semibold my-2">{{acara.nama}}</p>
-              <div class="flex space-x-2 text-gray-400 text-sm">
+              <p class="text-xl font-semibold my-2 dark:text-black">{{acara.nama}}</p>
+              <div class="flex space-x-2 text-gray-400 text-sm dark:text-black">
                 <!-- svg  -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -30,7 +30,7 @@
                 </svg>
                 <p>Zoom</p>
               </div>
-              <div class="flex space-x-2 text-gray-400 text-sm my-3">
+              <div class="flex space-x-2 text-gray-400 text-sm my-3 dark:text-black">
                 <!-- svg  -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -41,7 +41,7 @@
 
               <div class="flex justify-between">
                 <div class="my-2">
-                  <p class="text-left font-semibold text-base mb-2">Pemateri</p>
+                  <p class="text-left font-semibold text-base mb-2 dark:text-black">Pemateri</p>
                   <div class="flex space-x-2">
                     <div v-for="(pemateri, index) in acara.pemateri"
                          :key="index"
@@ -56,8 +56,8 @@
                   </div>
                 </div>
                 <div class="my-2">
-                  <p class="font-semibold text-base mb-2">Kategori</p>
-                  <div class="text-base text-gray-400 font-semibold">
+                  <p class="font-semibold text-base mb-2 dark:text-black">Kategori</p>
+                  <div class="text-base text-gray-400 font-semibold dark:text-black">
                     <p>Free</p>
                   </div>
                 </div>
