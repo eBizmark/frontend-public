@@ -60,40 +60,99 @@
             v-model="formData.email"
         />
       </div>
-<!--      <div class="md:flex md:items-center mb-6">-->
-<!--        <div class="md:w-1/6">-->
-<!--          <label-->
-<!--              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"-->
-<!--              for="tanggal"-->
-<!--          >-->
-<!--            Tanggal Lahir-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        <div class="inline-block relative w-64">-->
-<!--          <litepie-datepicker-->
-<!--              as-single-->
-<!--              :formatter="formatter"-->
-<!--              id="tanggal"-->
-<!--              v-model="formData.tanggal"-->
-<!--          ></litepie-datepicker>-->
-<!--        </div>-->
-<!--      </div>-->
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
           <label
               class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-              for="domisili"
+              for="tanggal"
+          >
+            Tanggal Lahir
+          </label>
+        </div>
+        <div class="inline-block relative w-64">
+          <litepie-datepicker
+              as-single
+              :formatter="formatter"
+              id="tanggal"
+              v-model="formData.tanggal"
+          ></litepie-datepicker>
+        </div>
+      </div>
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+              for="provinsi"
+          >
+            Provinsi Domisili
+          </label>
+        </div>
+        <div id="v-model-select-provinsi" class="inline-block relative w-64">
+          <select
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              id="provinsi"
+              v-model="prov"
+          >
+            <option disabled value="">Pilih provinsi</option>
+            <option
+                v-for="provinsi in dataProvinsi"
+                :value="provinsi"
+            >
+              {{ provinsi.nama }}
+            </option>
+          </select>
+          <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+              for="kota"
           >
             Kota Domisili
           </label>
         </div>
-        <input
-            class="inline-block relative w-64 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="domisili"
-            type="text"
-            placeholder="Contoh : Kota Bandung/Kabupaten Bintan"
-            v-model="formData.domisili"
-        />
+        <div id="v-model-select-dynamic" class="inline-block relative w-64">
+          <select
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              id="kota"
+              v-model="formData.kota"
+          >
+            <option disabled value="">Pilih kota</option>
+            <option
+                v-for="kota in dataKota"
+                :value="kota.nama"
+            >
+              {{ kota.nama }}
+            </option>
+          </select>
+          <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
@@ -300,8 +359,10 @@
 
 <script>
 import {useHead} from '@vueuse/head'
-import { defineComponent, computed, toRefs, ref, onMounted, reactive } from 'vue'
+import { defineComponent, watch, ref, onMounted, reactive } from 'vue'
 import {useRoute, useRouter} from 'vue-router'
+// import Multiselect from '@vueform/multiselect'
+// import vSelect from 'vue-select'
 import axios from "axios";
 import LitepieDatepicker from 'litepie-datepicker'
 export default defineComponent({
@@ -309,6 +370,8 @@ export default defineComponent({
   // props: ['slug'],
   components: {
     LitepieDatepicker,
+    // Multiselect,
+    // vSelect
   },
   setup(){
     useHead({title: 'Form Pemesan'})
@@ -329,14 +392,13 @@ export default defineComponent({
       noHp:'',
       email:'',
       tanggal:'',
-      domisili:'',
+      provinsi:'',
+      kota:'',
       referal:''
     })
     // const dataEvent = toRefs(event)
     const showKategoriModal = ref(false)
     const event = ref(eventDetail)
-    // const kategori = ref('')
-    // let modalData = reactive({})
 
     const route = useRoute()
     // const slug = computed(() => route.params.slug)
@@ -358,8 +420,34 @@ export default defineComponent({
       month: 'MM',
     })
 
+    const dataKota = ref([])
+    const dataProvinsi = ref([])
+    const prov = ref('')
+
+    const getDataProv = async () => {
+      let { data } = await axios.get('https://api-ebizmark.irvankdhf.xyz/api/v1/provinsi')
+      // data.sort((a, b) => a.nama.localeCompare(b.nama))
+      dataProvinsi.value = data
+      // console.log(dataPemateri.value)
+      // multiselectData.value = modifyKey(dataKota.value)
+    }
+
+    watch(prov, (newValue) => {
+      // console.log(newValue)
+      formData.provinsi = newValue.nama
+      // console.log("ini data provinsi" + formData.provinsi)
+      getDataKota(newValue.id_prov)
+    })
+
+    const getDataKota = async (prov) => {
+      let { data } = await axios.get('https://api-ebizmark.irvankdhf.xyz/api/v1/kabupaten/'+prov)
+      dataKota.value = data
+    }
+
     onMounted(() => {
       getEvent()
+      getDataProv()
+      // getDataKota()
     })
 
     // function toggleKategoriModal() {
@@ -396,6 +484,9 @@ export default defineComponent({
       // kategori,
       // toggleKategoriModal,
       formData,
+      dataKota,
+      dataProvinsi,
+      prov,
       formatter,
       keFormMahasiswa,
       keFormUmum
