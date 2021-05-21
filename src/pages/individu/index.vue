@@ -60,24 +60,24 @@
             v-model="formData.email"
         />
       </div>
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/6">
-          <label
-              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-              for="tanggal"
-          >
-            Tanggal Lahir
-          </label>
-        </div>
-        <div class="inline-block relative w-64">
-          <litepie-datepicker
-              as-single
-              :formatter="formatter"
-              id="tanggal"
-              v-model="formData.tanggal"
-          ></litepie-datepicker>
-        </div>
-      </div>
+<!--      <div class="md:flex md:items-center mb-6">-->
+<!--        <div class="md:w-1/6">-->
+<!--          <label-->
+<!--              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"-->
+<!--              for="tanggal"-->
+<!--          >-->
+<!--            Tanggal Lahir-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <div class="inline-block relative w-64">-->
+<!--          <litepie-datepicker-->
+<!--              as-single-->
+<!--              :formatter="formatter"-->
+<!--              id="tanggal"-->
+<!--              v-model="formData.tanggal"-->
+<!--          ></litepie-datepicker>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
           <label
@@ -115,13 +115,13 @@
 
       <!--Footer-->
       <div class="flex justify-end pt-2">
-        <router-link
-            to="/events"
+        <button
+            @click="$router.go(-1)"
             type="button"
             class="px-6 py-3 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
         >
           Kembali
-        </router-link>
+        </button>
         <button
             class="px-3 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500"
         >
@@ -131,22 +131,18 @@
     </form>
     <!--Kategori Umum/Mahasiswa Modal-->
     <card-modal :showing="showKategoriModal" @close="showKategoriModal = false">
-      <h2 class="text-xl font-bold text-gray-900">Kategori Tiket</h2>
-      <div class="my-4 w-full">
-        <button class="btn-indigo hover:bg-indigo-400 w-1/3 mx-2" @click="keFormMahasiswa">
+      <h2 class="text-xl font-bold text-gray-900 text-center">Kategori Tiket</h2>
+      <div class="my-4 w-full flex justify-center">
+        <button class="btn-indigo hover:bg-indigo-400 md:w-1/4 mx-2" @click="keFormMahasiswa">
             Mahasiswa
         </button>
         <!--        <button class="btn-indigo hover:bg-indigo-400 w-full my-2">-->
         <!--          Mahasiswa-->
         <!--        </button>-->
-        <button class="btn-indigo hover:bg-indigo-400 w-1/3 mx-2" @click="keFormUmum">
+        <button class="btn-indigo hover:bg-indigo-400 md:w-1/4 mx-2" @click="keFormUmum">
           Umum
         </button>
       </div>
-
-      <button class="btn-red hover:bg-red-400" @click="showKategoriModal = false">
-        Close
-      </button>
     </card-modal>
   </div>
 <!--  <div-->
@@ -376,8 +372,16 @@ export default defineComponent({
     //   showKategoriModal.value = !showKategoriModal.value;
     // }
 
-    function keFormMahasiswa() {
+    const router = useRouter()
 
+    function keFormMahasiswa() {
+      router.push({
+        name: 'form-mahasiswa',
+        params: {
+          slug: slug,
+          pemesan: formData
+        }
+      })
     }
 
     function keFormUmum() {

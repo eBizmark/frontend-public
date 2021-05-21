@@ -17,7 +17,7 @@
 <!--        </div>-->
       </nav>
     </header>
-    <main class="md:px-6 px-8 py-12 md:pt-24 pb-24 py-10 text-center text-gray-700 dark:text-gray-200">
+    <main class="md:px-6 px-8 py-12 md:pt-24 pb-24 py-10 text-gray-700 dark:text-gray-200">
       <router-view v-bind="$attrs" />
       <Footer />
     </main>

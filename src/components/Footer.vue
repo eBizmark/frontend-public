@@ -33,12 +33,11 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav class="text-xl mt-6 space-x-2">
-    <a class="icon-btn" @click="toggleDark">
+  <nav class="text-xl space-x-2 mt-20 flex flex-row items-center justify-center">
+    <i class="icon-btn cursor-pointer" @click="toggleDark">
       <carbon-moon v-if="isDark" />
       <carbon-sun v-else />
-    </a>
-
+    </i>
     <router-link class="icon-btn" to="/about">
       <carbon-dicom-overlay />
     </router-link>

@@ -4,13 +4,11 @@ const vue = require('@vitejs/plugin-vue')
 const api = require('./node-server/api')
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import ViteComponents from 'vite-plugin-components'
-import WindiCSS from 'vite-plugin-windicss'
 
 module.exports = defineConfig({
     plugins: [
         viteSSR(),
         vue(),
-        WindiCSS(),
         ViteComponents({
             // allow auto load markdown components under `./src/components/`
             extensions: ['vue'],

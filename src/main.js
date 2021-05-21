@@ -1,5 +1,4 @@
-import 'virtual:windi.css'
-import './styles/main.css'
+import './styles/app.css'
 import App from './App.vue'
 import routes from './routes'
 import viteSSR, { ClientOnly } from 'vite-ssr'

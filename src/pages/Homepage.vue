@@ -19,7 +19,7 @@
     </p>
     <span class="text-center">e-bizmarksolutions.com</span>
     <router-link to="/events">
-      <span class="btn-indigo">List Events</span>
+      <span class="btn-indigo hover:bg-indigo-400">List Events</span>
     </router-link>
   </div>
 </template>
