@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto px-20">
-    <h2 class="pb-3 md:text-2xl text-lg font-bold dark:text-white">Daftar Acara</h2>
+    <h2 class="pb-3 md:text-2xl sm:text-left text-center text-lg font-bold dark:text-white">Daftar Acara</h2>
     <div class="border-t-2 py-4"></div>
   </div>
   <!-- component -->
@@ -46,7 +46,7 @@
                     <div v-for="(pemateri, index) in acara.pemateri"
                          :key="index"
                     >
-                      <img :src="pemateri.foto"
+                      <img :src="'https://api-ebizmark.irvankdhf.xyz'+pemateri.foto"
                            class="w-6 h-6 rounded-full"/>
                     </div>
 <!--                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Woman_7.jpg"-->
