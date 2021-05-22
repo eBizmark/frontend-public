@@ -37,7 +37,6 @@ export default {
       if (value) {
         return document.querySelector("body").classList.add("overflow-hidden");
       }
-
       document.querySelector("body").classList.remove("overflow-hidden");
     }
   },
