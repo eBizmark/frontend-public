@@ -35,30 +35,85 @@
             Universitas
           </label>
         </div>
-        <input
-            class="inline-block relative w-64 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="universitas"
-            type="text"
-            placeholder="Pilih"
-            v-model="formData.universitas"
-        />
+        <div id="v-model-select-provinsi" class="inline-block relative w-64">
+          <select
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              id="universitas"
+              v-model="univ"
+          >
+            <option disabled value="">Pilih universitas</option>
+            <option
+                v-for="univ in dataUniversitas"
+                :value="univ.nama"
+            >
+              {{ univ.nama }}
+            </option>
+          </select>
+          <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
           <label
               class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-              for="programStudi"
+              for="prodi"
           >
             Program Studi
           </label>
         </div>
-        <input
-            class="inline-block relative w-64 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="programStudi"
-            type="text"
-            placeholder="Pilih"
-            v-model="formData.programStudi"
-        />
+        <div id="v-model-select-dynamic" class="inline-block relative w-64">
+          <select
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              id="prodi"
+              v-model="formData.programStudi"
+          >
+            <option disabled value="">Pilih prodi</option>
+            <option
+                v-for="prodi in dataProdi"
+                :value="prodi.nama"
+            >
+              {{ prodi.nama }}
+            </option>
+          </select>
+          <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+            >
+              <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+              for="dataPemesan"
+          >
+            Samakan dengan pemesan
+          </label>
+        </div>
+        <div>
+          <input type="checkbox" id="dataPemesan" v-model="toggle" true-value="yes" false-value="no" />
+        </div>
       </div>
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
@@ -94,24 +149,24 @@
             v-model="formData.email"
         />
       </div>
-      <!--      <div class="md:flex md:items-center mb-6">-->
-      <!--        <div class="md:w-1/6">-->
-      <!--          <label-->
-      <!--              class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"-->
-      <!--              for="tanggal"-->
-      <!--          >-->
-      <!--            Tanggal Lahir-->
-      <!--          </label>-->
-      <!--        </div>-->
-      <!--        <div class="inline-block relative w-64">-->
-      <!--          <litepie-datepicker-->
-      <!--              as-single-->
-      <!--              :formatter="formatter"-->
-      <!--              id="tanggal"-->
-      <!--              v-model="formData.tanggal"-->
-      <!--          ></litepie-datepicker>-->
-      <!--        </div>-->
-      <!--      </div>-->
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label
+                class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+                for="tanggal"
+            >
+              Tanggal Lahir
+            </label>
+          </div>
+          <div class="inline-block relative w-64">
+            <litepie-datepicker
+                as-single
+                :formatter="formatter"
+                id="tanggal"
+                v-model="formData.tanggal"
+            ></litepie-datepicker>
+          </div>
+        </div>
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
           <label
@@ -166,7 +221,7 @@
 
 <script>
 import {useHead} from '@vueuse/head'
-import { defineComponent, computed, ref, onMounted, reactive } from 'vue'
+import {defineComponent, computed, ref, onMounted, reactive, watch} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import LitepieDatepicker from 'litepie-datepicker'
 import axios from "axios";
@@ -199,8 +254,10 @@ export default defineComponent({
     })
     const route = useRoute()
     const pemesan = route.params.pemesan
-    const slug = route.params.slug
+    // const slug = route.params.slug
     const showConfirmModal = ref(false)
+    const toggle = ref(false)
+    const dataPemesan = route.params.pemesan
 
     function submitPemesan() {
 
@@ -209,6 +266,47 @@ export default defineComponent({
     function submitPeserta() {
 
     }
+
+    const dataUniversitas = ref([])
+    const dataProdi = ref([])
+    const univ = ref('')
+
+    const getDataUniv = async () => {
+      // let { data } = await axios.get('https://api-ebizmark.irvankdhf.xyz/api/v1/provinsi')
+
+      // dataProvinsi.value = data
+      // console.log(dataPemateri.value)
+      // multiselectData.value = modifyKey(dataKota.value)
+    }
+
+    watch(univ, (newValue) => {
+
+      // formData.universitas = newValue.nama
+
+      // getDataKota(newValue.id_univ)
+    })
+
+    watch(toggle, () => {
+      // let { data } = await axios.get('https://api-ebizmark.irvankdhf.xyz/api/v1/provinsi')
+      // formData.universitas = newValue.nama
+
+      // getDataKota(newValue.id_univ)
+    })
+
+    const getDataProdi = async (univ) => {
+      // let { data } = await axios.get('https://api-ebizmark.irvankdhf.xyz/api/v1/kabupaten/'+univ)
+      // dataProdi.value = data
+    }
+
+    const formatter = reactive({
+      date: 'YYYY-MM-DD',
+      month: 'MM',
+    })
+
+    onMounted(() => {
+      getDataUniv()
+      // getDataKota()
+    })
 
     function submitAll() {
       submitPemesan()
@@ -219,6 +317,11 @@ export default defineComponent({
       formData,
       pemesan,
       showConfirmModal,
+      dataUniversitas,
+      univ,
+      formatter,
+      dataProdi,
+      toggle,
       submitAll
     }
   },
