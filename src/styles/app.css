@@ -49,9 +49,6 @@
 ::-webkit-scrollbar-thumb:hover{
     background: #718096;
 }
-body.modal-open {
-    overflow: hidden;
-}
 html,
 body,
 #app {
