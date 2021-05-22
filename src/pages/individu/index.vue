@@ -202,6 +202,11 @@
           Umum
         </button>
       </div>
+      <div class="flex justify-end">
+        <button class="btn-red hover:bg-red-400" @click="showKategoriModal = false">
+          Close
+        </button>
+      </div>
     </card-modal>
   </div>
 <!--  <div-->
@@ -466,8 +471,9 @@ export default defineComponent({
       router.push({
         name: 'form-mahasiswa',
         params: {
-          slug: slug,
-          pemesan: formData
+          // slug: slug,
+          pemesan: formData,
+          event: event
         }
       })
     }
