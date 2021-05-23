@@ -1,12 +1,19 @@
 const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 const typography = require('@tailwindcss/typography')
+const path = require('path');
 module.exports = {
   mode: 'jit',
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  purge: [
+      './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}',
+    path.resolve(__dirname, './node_modules/litepie-datepicker/**/*.js')
+  ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
+      'litepie-primary': colors.lightBlue, // color system for light mode
+      'litepie-secondary': colors.coolGray, // color system for dark mode
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,
